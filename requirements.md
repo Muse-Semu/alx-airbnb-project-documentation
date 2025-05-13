@@ -5,13 +5,15 @@ This document outlines the technical and functional requirements for three key b
 ## 1. User Authentication
 
 ### Functional Requirements
+
 - **F1.1**: Users (Guests and Hosts) can register with an email, password, and role.
 - **F1.2**: Users (Guests, Hosts, Admins) can log in with email and password to receive a session token.
 - **F1.3**: Users can update their profile (e.g., name, phone number).
 - **F1.4**: Role-based access control ensures Guests access booking features, Hosts manage properties, and Admins manage users and disputes.
 
 ### Technical Requirements
-- **T1.1**: Implement a RESTful API using a framework (e.g., Node.js/Express, Flask).
+
+- **T1.1**: Implement a RESTful API using a framework (e.g., Django).
 - **T1.2**: Use JWT (JSON Web Tokens) for session management, with tokens valid for 24 hours.
 - **T1.3**: Store passwords using bcrypt hashing with a salt factor of 12.
 - **T1.4**: Use PostgreSQL for the `users` table (fields: `user_id`, `first_name`, `last_name`, `email`, `password_hash`, `phone_number`, `role`, `created_at`).
@@ -21,6 +23,7 @@ This document outlines the technical and functional requirements for three key b
 ### API Endpoints
 
 #### 1.1 Register User
+
 - **Endpoint**: `POST /api/auth/register`
 - **Description**: Creates a new user account.
 - **Request Body** (JSON):
@@ -58,6 +61,7 @@ This document outlines the technical and functional requirements for three key b
   - Scalability: Support 10,000 concurrent users with horizontal scaling.
 
 #### 1.2 Login User
+
 - **Endpoint**: `POST /api/auth/login`
 - **Description**: Authenticates a user and returns a JWT.
 - **Request Body** (JSON):
@@ -87,6 +91,7 @@ This document outlines the technical and functional requirements for three key b
   - Security: Rate-limit to 5 attempts per IP per minute.
 
 #### 1.3 Update Profile
+
 - **Endpoint**: `PUT /api/auth/profile`
 - **Description**: Updates user profile information.
 - **Headers**: `Authorization: Bearer <JWT>`
@@ -121,11 +126,13 @@ This document outlines the technical and functional requirements for three key b
 ## 2. Property Management
 
 ### Functional Requirements
+
 - **F2.1**: Hosts can create, update, and delete property listings.
 - **F2.2**: Guests can search properties by location, price, or dates.
 - **F2.3**: System stores property details, including location data.
 
 ### Technical Requirements
+
 - **T2.1**: RESTful API for property CRUD operations.
 - **T2.2**: Use PostgreSQL for `properties` (fields: `property_id`, `host_id`, `location_id`, `name`, `description`, `pricepernight`, `created_at`, `updated_at`) and `locations` (fields: `location_id`, `street_address`, `city`, `state`, `country`, `postal_code`).
 - **T2.3**: Implement indexing on `properties(location_id, pricepernight)` and `locations(city, country)` for search performance.
@@ -135,6 +142,7 @@ This document outlines the technical and functional requirements for three key b
 ### API Endpoints
 
 #### 2.1 Create Property
+
 - **Endpoint**: `POST /api/properties`
 - **Description**: Creates a new property listing.
 - **Headers**: `Authorization: Bearer <JWT>`
@@ -179,6 +187,7 @@ This document outlines the technical and functional requirements for three key b
   - Throughput: Handle 500 creations/hour.
 
 #### 2.2 Search Properties
+
 - **Endpoint**: `GET /api/properties/search?city=<string>&min_price=<number>&max_price=<number>&start_date=<date>&end_date=<date>`
 - **Description**: Searches properties by criteria.
 - **Request Query Parameters**:
@@ -211,11 +220,13 @@ This document outlines the technical and functional requirements for three key b
 ## 3. Booking System
 
 ### Functional Requirements
+
 - **F3.1**: Guests can book a property for specific dates.
 - **F3.2**: System validates availability and calculates total price.
 - **F3.3**: Guests can view their booking history.
 
 ### Technical Requirements
+
 - **T3.1**: RESTful API for booking creation and retrieval.
 - **T3.2**: Use PostgreSQL for `bookings` (fields: `booking_id`, `property_id`, `user_id`, `start_date`, `end_date`, `total_price`, `status`, `created_at`).
 - **T3.3**: Implement indexing on `bookings(property_id, user_id, start_date)` for performance.
@@ -225,6 +236,7 @@ This document outlines the technical and functional requirements for three key b
 ### API Endpoints
 
 #### 3.1 Create Booking
+
 - **Endpoint**: `POST /api/bookings`
 - **Description**: Creates a new booking.
 - **Headers**: `Authorization: Bearer <JWT>`
@@ -263,6 +275,7 @@ This document outlines the technical and functional requirements for three key b
   - Concurrency: Prevent double bookings using database locks.
 
 #### 3.2 View Booking History
+
 - **Endpoint**: `GET /api/bookings`
 - **Description**: Retrieves a user’s booking history.
 - **Headers**: `Authorization: Bearer <JWT>`
