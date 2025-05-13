@@ -1,0 +1,76 @@
+@startmindmap
+* AirBnB Clone Backend Features
+** User Authentication
+*** Registration
+*** Login
+*** Password Hashing
+*** Role-Based Access
+*** Profile Management
+** Property Management
+*** Create/Update/Delete Properties
+*** Location Management
+*** Property Search
+*** Property Listing
+** Booking System
+*** Create Booking
+*** Validate Availability
+*** Calculate Total Price
+*** Manage Booking Status
+*** View Booking History
+** Payment Processing
+*** Process Payments
+*** Support Multiple Methods
+*** Store Payment Details
+*** Handle Refunds
+** Review System
+*** Submit Review
+*** Display Reviews
+*** Restrict to Completed Bookings
+** Messaging System
+*** Send/Receive Messages
+*** Store Message History
+*** Notify New Messages
+** Admin Features
+*** Manage Users
+*** Moderate Properties
+*** Handle Disputes
+*** View Metrics
+** Additional Features
+*** Search and Filter
+*** Availability Calendar
+*** Audit Trails
+*** Data Validation
+
+' Styling
+skinparam monochrome false
+skinparam shadowing false
+skinparam defaultFontSize 12
+skinparam node {
+  BackgroundColor LightBlue
+  BorderColor Black
+}
+skinparam node<<User Authentication>> {
+  BackgroundColor #ADD8E6
+}
+skinparam node<<Property Management>> {
+  BackgroundColor #90EE90
+}
+skinparam node<<Booking System>> {
+  BackgroundColor #FFA500
+}
+skinparam node<<Payment Processing>> {
+  BackgroundColor #DDA0DD
+}
+skinparam node<<Review System>> {
+  BackgroundColor #FF6347
+}
+skinparam node<<Messaging System>> {
+  BackgroundColor #20B2AA
+}
+skinparam node<<Admin Features>> {
+  BackgroundColor #D3D3D3
+}
+skinparam node<<Additional Features>> {
+  BackgroundColor #FFFF00
+}
+@endmindmap
